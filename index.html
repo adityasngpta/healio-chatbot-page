@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>He@lio - Your Mental Health Companion</title>
+    <link rel="icon" href="bot.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Welcome to He@lio! 👋</h2>
+            <p>I'm your loyal companion, here to listen to you rant about school, homework, or anything else on your mind.</p>
+            <p>Feel free to journal your thoughts, track your mood, or just chat with me. I'll always stay calm, even when things feel overwhelming.</p>
+            <button id="getStartedBtn" class="primary-button">Get Started</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="bot.png" alt="He@lio" class="bot-avatar">
+                <h3>He@lio</h3>
+            </div>
+            
+            <div class="sidebar-menu">
+                <button id="chatBtn" class="menu-btn active"><i class="fas fa-comment"></i> Chat</button>
+                <button id="journalBtn" class="menu-btn"><i class="fas fa-book"></i> Journal</button>
+                <button id="resourcesBtn" class="menu-btn"><i class="fas fa-link"></i> Resources</button>
+                <button id="activitiesBtn" class="menu-btn"><i class="fas fa-spa"></i> Activities</button>
+                <button id="goalsBtn" class="menu-btn"><i class="fas fa-tasks"></i> Goals</button>
+            </div>
+            
+            <div class="mood-tracker">
+                <h4>How are you feeling today?</h4>
+                <div class="mood-options">
+                    <span class="mood" data-mood="great">😄</span>
+                    <span class="mood" data-mood="good">🙂</span>
+                    <span class="mood" data-mood="okay">😐</span>
+                    <span class="mood" data-mood="sad">😔</span>
+                    <span class="mood" data-mood="terrible">😢</span>
+                </div>
+            </div>
+            
+            <div class="theme-toggle">
+                <span>Theme: </span>
+                <button id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- Chat Section -->
+            <div id="chatSection" class="section active">
+                <div class="chat">
+                    <div class="chat-header">
+                        He@lio - Your Supportive Friend
+                        <div class="chat-controls">
+                            <button id="audioToggleBtn" title="Mute Audio" class="control-btn">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="messages" class="messages"></div>
+                    
+                    <!-- Quick Response Options -->
+                    <div class="quick-responses" id="quickResponses">
+                        <button class="quick-response-btn" data-response="I'm feeling stressed about school">Stressed about school</button>
+                        <button class="quick-response-btn" data-response="I need help with time management">Time management</button>
+                        <button class="quick-response-btn" data-response="I'm feeling overwhelmed">Feeling overwhelmed</button>
+                        <button class="quick-response-btn" data-response="I'm having trouble focusing">Trouble focusing</button>
+                    </div>
+                    
+                    <div class="input-container">
+                        <input id="input" type="text" 
+                            placeholder="Share what's on your mind... I'm here to listen" 
+                            autocomplete="off" 
+                            autofocus="true" />
+                        <button id="voiceInputBtn" title="Voice Input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button id="sendBtn" title="Send Message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Journal Section -->
+            <div id="journalSection" class="section">
+                <div class="journal-container">
+                    <h2>My Journal</h2>
+                    <p class="journal-intro">Writing down your thoughts can help clear your mind. He@lio loves journaling too!</p>
+                    
+                    <div class="journal-entry">
+                        <input type="text" id="journalTitle" placeholder="Entry title...">
+                        <div class="journal-date" id="journalDate"></div>
+                        <textarea id="journalContent" placeholder="Today I felt..."></textarea>
+                        
+                        <!-- AI Journal Assistant -->
+                        <div class="journal-ai-assistant">
+                            <div class="journal-ai-buttons">
+                                <button id="journalPromptBtn" class="secondary-button"><i class="fas fa-lightbulb"></i> Get a prompt</button>
+                                <button id="journalAnalyzeBtn" class="secondary-button"><i class="fas fa-chart-line"></i> Analyze my entry</button>
+                                <button id="journalExpandBtn" class="secondary-button"><i class="fas fa-expand-alt"></i> Help me expand</button>
+                            </div>
+                            <div id="journalAiResponse" class="journal-ai-response"></div>
+                        </div>
+                        
+                        <button id="saveJournalBtn" class="primary-button">Save Entry</button>
+                    </div>
+                    
+                    <div class="journal-history">
+                        <h3>Previous Entries</h3>
+                        <div id="journalEntries"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resources Section -->
+            <div id="resourcesSection" class="section">
+                <div class="resources-container">
+                    <h2>Helpful Resources</h2>
+                    <p>Here are some trusted resources that might help when you're feeling overwhelmed or need support:</p>
+                    
+                    <div class="resource-cards">
+                        <div class="resource-card">
+                            <h3>Crisis Support</h3>
+                            <p>If you need immediate help or are experiencing a crisis, these services provide 24/7 support:</p>
+                            <ul>
+                                <li>Crisis Text Line: Text HOME to 741741 for free 24/7 crisis counseling</li>
+                                <li>988 Suicide & Crisis Lifeline: Call or text 988 any time</li>
+                                <li>The Trevor Project: Support for LGBTQ+ youth - call 1-866-488-7386</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <h3>Stress Management</h3>
+                            <p>Evidence-based resources for managing stress and anxiety:</p>
+                            <ul>
+                                <li><a href="https://www.headspace.com/student-plan" target="_blank" rel="noopener noreferrer">Headspace for Students</a> - Meditation app with student pricing</li>
+                                <li><a href="https://www.calm.com/schools" target="_blank" rel="noopener noreferrer">Calm for Schools</a> - Free mindfulness resources</li>
+                                <li><a href="https://www.anxietycanada.com/resources/mindshift-cbt/" target="_blank" rel="noopener noreferrer">MindShift CBT</a> - Free anxiety management app</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <h3>Academic Support</h3>
+                            <p>Resources to help manage academic stress:</p>
+                            <ul>
+                                <li><a href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer">Khan Academy</a> - Free expert-created content</li>
+                                <li><a href="https://www.edx.org/search?tab=course" target="_blank" rel="noopener noreferrer">edX</a> - Free courses from top institutions</li>
+                                <li><a href="https://www.coursera.org/courses?query=free" target="_blank" rel="noopener noreferrer">Coursera Free Courses</a> - Various topics</li>
+                            </ul>
+                        </div>
+
+                        <div class="resource-card">
+                            <h3>Mental Health Apps</h3>
+                            <p>Mobile apps for mental well-being:</p>
+                            <ul>
+                                <li><a href="https://www.happify.com/" target="_blank" rel="noopener noreferrer">Happify</a> - Science-based activities and games</li>
+                                <li><a href="https://www.wysa.io/" target="_blank" rel="noopener noreferrer">Wysa</a> - AI chatbot for emotional support</li>
+                                <li><a href="https://daylio.net/" target="_blank" rel="noopener noreferrer">Daylio</a> - Mood tracking and journaling</li>
+                            </ul>
+                        </div>
+
+                        <div class="resource-card">
+                            <h3>Self-Help Books</h3>
+                            <p>Recommended reading for mental health:</p>
+                            <ul>
+                                <li>"Feeling Good: The New Mood Therapy" by David D. Burns</li>
+                                <li>"Atomic Habits" by James Clear</li>
+                                <li>"The Anxiety and Phobia Workbook" by Edmund J. Bourne</li>
+                            </ul>
+                        </div>
+
+                        <div class="resource-card emergency-notice">
+                            <h3>Important Notice</h3>
+                            <p>If you're experiencing a medical emergency or are in immediate danger, please call emergency services (911 in the US) right away. These resources are not substitutes for professional care.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- New Activities Section -->
+            <div id="activitiesSection" class="section">
+                <div class="activities-container">
+                    <h2>Mindfulness Activities</h2>
+                    <p>Try these activities to help you relax and refocus:</p>
+                    
+                    <div class="activity-cards">
+                        <div class="activity-card" id="breathingExercise">
+                            <h3><i class="fas fa-wind"></i> Breathing Exercise</h3>
+                            <p>Follow the animation to practice deep breathing.</p>
+                            <div class="breathing-animation">
+                                <div class="breathing-circle"></div>
+                                <p class="breathing-instruction">Breathe in...</p>
+                            </div>
+                            <button class="start-activity-btn">Start</button>
+                        </div>
+                        
+                        <div class="activity-card" id="gratitudeExercise">
+                            <h3><i class="fas fa-heart"></i> Gratitude Practice</h3>
+                            <p>Write down three things you're grateful for today.</p>
+                            <div class="gratitude-inputs">
+                                <input type="text" placeholder="I'm grateful for..." class="gratitude-input">
+                                <input type="text" placeholder="I'm grateful for..." class="gratitude-input">
+                                <input type="text" placeholder="I'm grateful for..." class="gratitude-input">
+                            </div>
+                            <button class="save-gratitude-btn">Save</button>
+                        </div>
+                        
+                        <div class="activity-card" id="thoughtReframing">
+                            <h3><i class="fas fa-sync-alt"></i> Thought Reframing</h3>
+                            <p>Transform negative thoughts into positive ones.</p>
+                            <div class="reframing-container">
+                                <textarea class="negative-thought" placeholder="Write a negative thought..."></textarea>
+                                <i class="fas fa-arrow-down"></i>
+                                <textarea class="positive-reframe" placeholder="Reframe it positively..."></textarea>
+                            </div>
+                            <button class="reframe-btn">Get Help Reframing</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- New Goals Section -->
+            <div id="goalsSection" class="section">
+                <div class="goals-container">
+                    <h2>My Wellness Goals</h2>
+                    <p>Set and track small goals to improve your wellbeing.</p>
+                    
+                    <div class="add-goal-form">
+                        <input type="text" id="goalInput" placeholder="Enter a new goal...">
+                        <select id="goalCategory">
+                            <option value="physical">Physical Health</option>
+                            <option value="mental">Mental Wellbeing</option>
+                            <option value="social">Social Connection</option>
+                            <option value="academic">Academic Success</option>
+                        </select>
+                        <button id="addGoalBtn" class="primary-button">Add Goal</button>
+                    </div>
+                    
+                    <!-- AI Goal Generator -->
+                    <div class="goal-ai-section">
+                        <div class="goal-ai-header">
+                            <h3><i class="fas fa-robot"></i> Goal Suggestions</h3>
+                            <p>Let He@lio suggest personalized goals based on your interests and needs.</p>
+                        </div>
+                        
+                        <div class="goal-prompt-container">
+                            <div class="goal-prompt-inputs">
+                                <select id="goalAreaSelect">
+                                    <option value="">What area would you like to focus on?</option>
+                                    <option value="physical">Physical health</option>
+                                    <option value="mental">Mental wellbeing</option>
+                                    <option value="social">Social connections</option>
+                                    <option value="academic">Academic success</option>
+                                    <option value="creative">Creative expression</option>
+                                </select>
+                                
+                                <input type="text" id="goalSpecificInput" placeholder="Any specific interests or challenges? (optional)">
+                            </div>
+                            
+                            <button id="generateGoalsBtn" class="secondary-button"><i class="fas fa-magic"></i> Generate Goals</button>
+                        </div>
+                        
+                        <div id="goalSuggestions" class="goal-suggestions">
+                            <!-- AI generated goals will appear here -->
+                        </div>
+                        
+                        <div id="goalGenerationStatus" class="goal-generation-status">
+                            <!-- Loading spinner or status messages will appear here -->
+                        </div>
+                    </div>
+                    
+                    <div class="goals-list-container">
+                        <h3>Current Goals</h3>
+                        <div id="goalsList" class="goals-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Debug Panel (hidden in production) -->
+    <div id="debugPanel" style="display: none; position: fixed; bottom: 10px; right: 10px; z-index: 1000;">
+        <button id="debugAudio" class="debug-btn">Test Audio</button>
+    </div>
+    
+    <script type="module" src="index.js"></script>
+    <script src="speech.js"></script>
+    <script src="features.js"></script>
+</body>
+</html>
